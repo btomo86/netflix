@@ -7,13 +7,13 @@ function App() {
   return (
     <>
       <Router>
-        <Route exact path={ROUTES.BROWSE}>
+        <Route exact path="/browse">
           <Browse />
         </Route>
-        <Route exact path={ROUTES.SIGN_IN}>
+        <Route exact path="/signin">
           <Signin />
         </Route>
-        <Route exact path={ROUTES.SIGN_UP}>
+        <Route exact path="/signup">
           <Signup />
         </Route>
 
