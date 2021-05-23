@@ -14,6 +14,9 @@ import {
   Logo,
   Feature,
   FeatureCallOut,
+  Search,
+  SearchIcon,
+  SearchInput,
 } from "./styles/header";
 
 export default function Header({ bg = true, children, ...restProps }) {
