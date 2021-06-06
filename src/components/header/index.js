@@ -1,23 +1,22 @@
 import React, { useState } from "react";
-import { Link as ReactRouterLink } from "react-router-dom";
-
+import { Link as ReachRouterLink } from "react-router-dom";
 import {
-  Background,
   Container,
-  ButtonLink,
+  Group,
+  Background,
+  Dropdown,
   Picture,
   Link,
-  Dropdown,
-  Profile,
-  Group,
-  Text,
-  Logo,
-  Feature,
-  FeatureCallOut,
   Search,
+  Profile,
+  FeatureCallOut,
   SearchIcon,
   SearchInput,
+  ButtonLink,
   PlayButton,
+  Text,
+  Feature,
+  Logo,
 } from "./styles/header";
 
 export default function Header({ bg = true, children, ...restProps }) {
@@ -40,9 +39,35 @@ Header.Group = function HeaderGroup({ children, ...restProps }) {
 
 Header.Logo = function HeaderLogo({ to, ...restProps }) {
   return (
-    <ReactRouterLink to={to}>
+    <ReachRouterLink to={to}>
       <Logo {...restProps} />
-    </ReactRouterLink>
+    </ReachRouterLink>
+  );
+};
+
+Header.Search = function HeaderSearch({
+  searchTerm,
+  setSearchTerm,
+  ...restProps
+}) {
+  const [searchActive, setSearchActive] = useState(false);
+
+  return (
+    <Search {...restProps}>
+      <SearchIcon
+        onClick={() => setSearchActive((searchActive) => !searchActive)}
+        data-testid="search-click"
+      >
+        <img src="/images/icons/search.png" alt="Search" />
+      </SearchIcon>
+      <SearchInput
+        value={searchTerm}
+        onChange={({ target }) => setSearchTerm(target.value)}
+        placeholder="Search films and series"
+        active={searchActive}
+        data-testid="search-input"
+      />
+    </Search>
   );
 };
 
@@ -56,30 +81,6 @@ Header.Feature = function HeaderFeature({ children, ...restProps }) {
 
 Header.Picture = function HeaderPicture({ src, ...restProps }) {
   return <Picture {...restProps} src={`/images/users/${src}.png`} />;
-};
-
-Header.Search = function HeaderSearch(
-  { searchTerm },
-  setSearchTerm,
-  ...restProps
-) {
-  const [searchActive, setSearchActive] = useState(false);
-
-  return (
-    <Search {...restProps}>
-      <SearchIcon
-        onClick={() => setSearchActive((searchActive) => !searchActive)}
-      >
-        <img src="/images/icons/search.png" alt="search" />
-      </SearchIcon>
-      <SearchInput
-        value={searchTerm}
-        onChange={({ target }) => setSearchTerm(target.value)}
-        placeholder="Search films and series"
-        active={searchActive}
-      />
-    </Search>
-  );
 };
 
 Header.Dropdown = function HeaderDropdown({ children, ...restProps }) {
